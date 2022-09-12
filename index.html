@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            border-radius: 1.2em;
+        }
+    </style>
+    <title>Rick</title>
+</head>
+
+<body>
+
+    <section id="movies">
+
+    </section>
+
+    <script>
+        const baseUrl = "https://rickandmortyapi.com/api/character";
+        const movies = document.getElementById('movies');
+
+        async function getMoviesInfo() {
+            const response = await fetch(baseUrl)
+            const moviesInfo = await response.json()
+            return moviesInfo;
+        }
+
+        getMoviesInfo().then(data => {
+            data.results.map(movieInfo => {
+                const h2 = document.createElement('h2');
+                h2.innerHTML = movieInfo.name;
+                const img = document.createElement('img');
+                img.src = movieInfo.image;
+                movies.appendChild(h2);
+                movies.appendChild(img);
+            })
+        })
+    </script>
+</body>
+
+</html>
